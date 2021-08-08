@@ -1,0 +1,167 @@
+import pygame
+import random
+import pygame, sys
+pygame.init()
+
+#variables
+DISPLAY_WIDTH = 800
+DISPLAY_HEIGHT = 600
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+exitroom = False
+points  =0
+
+gameDisplay = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT))
+pygame.display.set_caption("Environ-scape!")
+wall = pygame.image.load("wall.png").convert_alpha()
+calendar = pygame.image.load("calendar.png").convert_alpha()
+calendar2 = pygame.image.load("calendar2.png").convert_alpha()
+door = pygame.image.load("door.png").convert_alpha()
+door2 = pygame.image.load("door2.png").convert_alpha()
+drawer = pygame.image.load("drawer.png").convert_alpha()
+drawer2 = pygame.image.load("drawer2.png").convert_alpha()
+heater = pygame.image.load("heater.png").convert_alpha()
+heater2 = pygame.image.load("heater2.png").convert_alpha()
+light = pygame.image.load("light.png").convert_alpha()
+light2 = pygame.image.load("light2.png").convert_alpha()
+light3 = pygame.image.load("light3.png").convert_alpha()
+light4 = pygame.image.load("light4.png").convert_alpha()
+switcho = pygame.image.load("switcho.png").convert_alpha()
+switchf = pygame.image.load("switchf.png").convert_alpha()
+clock = pygame.time.Clock()
+
+def button(text, x, y, width, height, size, tcolour1, tcolour2, icolour, acolour, action = None):
+    #Detects user input from mouse
+    mouse = pygame.mouse.get_pos()
+    click = pygame.mouse.get_pressed()
+
+    #Checks position of mouse to be in the button area
+    if x+width > mouse[0] > x and y+height > mouse[1] > y:
+        pygame.draw.rect(gameDisplay, acolour,(x, y, width, height))
+
+        largeText = pygame.font.Font('freesansbold.ttf', size)
+        textSurf, textRect = textObjects(text, largeText, tcolour2)   
+        textRect.center = (x+(width/2), y+(height/2))
+        gameDisplay.blit(textSurf, textRect)
+        if click[0] == 1 and action != None:
+            action() #activates action
+    else:
+        #Changes button colour
+        pygame.draw.rect(gameDisplay, icolour,(x, y, width, height))
+        largeText = pygame.font.Font('freesansbold.ttf', size)
+        textSurf, textRect = textObjects(text, largeText, tcolour1)   
+        textRect.center = (x+(width/2), y+(height/2))
+        gameDisplay.blit(textSurf, textRect)
+
+
+def makeroom():
+    pygame.draw.rect(gameDisplay, WHITE,(35, 50, DISPLAY_WIDTH-70, DISPLAY_HEIGHT-100)) 
+    pygame.draw.rect(gameDisplay, WHITE,(50, 35, DISPLAY_WIDTH-100, DISPLAY_HEIGHT-70)) 
+
+def drawimage(x, y, width, height, image1, image2, action = None):
+    mouse = pygame.mouse.get_pos()
+    click = pygame.mouse.get_pressed()
+    if x+width > mouse[0] > x and y+height > mouse[1] > y:
+        gameDisplay.blit(image2, (x, y))
+        if click[0] == 1 and action != None:
+            action() #activates action
+    else:
+       #Changes button colour
+       gameDisplay.blit(image1, (x, y))
+
+def opendrawer():
+    messageDisplay("ok but like why", 400, 500)
+def lookcalendar():
+    messageDisplay("ok but like why", 400, 500)
+
+def clickheater():
+    messageDisplay("ok but like why", 400, 500)
+
+def opendoor():
+    messageDisplay("ok but like why", 400, 500)
+
+def opendrawer():
+    messageDisplay("ok but like why", 400, 500)
+
+def clicklight():
+    messageDisplay("ok but like why", 400, 500)
+def lighton():
+    messageDisplay("ok but like why", 400, 500)
+    
+def bedroom():
+   # while not (exitroom):
+       # if (points == 5):
+      #      button("continue", 365, 350, 70, 50, 20, BLACK, WHITE, WHITE, BLACK, menu)
+   
+        gameDisplay.blit(wall, (50,0))
+
+        
+        drawimage(70, 400, 225,277,drawer, drawer2, opendrawer)
+        drawimage(650, 100, 180,156,calendar, calendar2, lookcalendar)
+        drawimage(550, 500, 119,194,heater, heater2, clickheater)
+        drawimage(700, 300, 114,437,door, door2, opendoor)
+        drawimage(400, 50, 66,86,light, light2, clicklight)
+        drawimage(690, 400, 18,86,switcho, switchf, lighton)
+        
+        pygame.draw.rect(gameDisplay, BLACK,(0, 0, DISPLAY_WIDTH, 50)) 
+        pygame.draw.rect(gameDisplay, BLACK,(0, DISPLAY_HEIGHT - 50, DISPLAY_WIDTH, 50))
+        pygame.draw.rect(gameDisplay, BLACK,(0, 0, 50, DISPLAY_HEIGHT))
+        pygame.draw.rect(gameDisplay, BLACK,(DISPLAY_WIDTH - 50, 0, 50, DISPLAY_HEIGHT))
+        pygame.draw.rect(gameDisplay, BLACK,(0, 0, 75, 75))
+        pygame.draw.rect(gameDisplay, BLACK,(DISPLAY_WIDTH - 75, 0, 75, 75))
+        pygame.draw.rect(gameDisplay, BLACK,(0, DISPLAY_HEIGHT - 75, 75, 75))
+        pygame.draw.rect(gameDisplay, BLACK,(DISPLAY_WIDTH - 75, DISPLAY_HEIGHT-75, 75, 75))
+
+
+def gameLoop():
+     rect_x = (DISPLAY_WIDTH * 0.45)
+     
+def quitGame():
+    pygame.quit()
+    sys.exit()
+    quit()
+    
+def textObjects(text, font, colour):
+    textSurface = font.render(text, True, colour)
+    #returns text + rectangle
+    return textSurface, textSurface.get_rect()
+
+def messageDisplay(text, x, y):
+    #set largetext's font + size
+    largeText = pygame.font.Font('freesansbold.ttf', 15)
+    textSurf, textRect = textObjects(text, largeText, WHITE)   
+    textRect.center = (x, y)
+    gameDisplay.blit(textSurf, textRect)
+    pygame.display.update()
+#def sidebar(tasks, full):
+    
+    
+#main display
+def menu():
+     #Declaration of variables    
+    gameExit = True
+   
+    while gameExit:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                gameExit = False
+                quit()
+        gameDisplay.fill(BLACK)
+        makeroom()
+        #Displays name
+        largeText = pygame.font.Font('freesansbold.ttf', 50)
+        textSurf, textRect = textObjects("CLIMATE ESCAPE", largeText, BLACK)   
+        textRect.center = (400, 300)
+        gameDisplay.blit(textSurf, textRect)
+
+        button("start", 365, 350, 70, 50, 20, BLACK, WHITE, WHITE, BLACK, bedroom)
+       # largeText = pygame.font.Font('freesansbold.ttf', 20)
+       # textSurf, textRect = textObjects("Test", largeText, BLACK)   
+       # textRect.center = (200, 300)
+       # gameDisplay.blit(textSurf, textRect)
+
+ 
+        pygame.display.update()
+        clock.tick(60)
+menu()
