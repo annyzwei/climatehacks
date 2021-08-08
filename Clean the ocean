@@ -1,0 +1,80 @@
+import pygame, random, sys
+Display=pygame.display.set_mode((800,600))
+pygame.display.set_caption("WATER!")
+clock=pygame.time.Clock()
+
+
+#Background Design
+bg=pygame.image.load("/GAME/PIX/ocean_2.jpeg").convert()
+bg=pygame.transform.scale(bg, (800,600)) 
+title=pygame.image.load("/GAME/PIX/Clean_theocean.png")
+plastic1=pygame.image.load("//GAME/PIX/plastic1.png").convert_alpha()
+plastic2=pygame.image.load("/GAME/PIX/plastic2.png").convert_alpha()
+fish1=pygame.image.load("//GAME/PIX/fish1.png").convert_alpha()
+fish2=pygame.image.load("//GAME/PIX/fish2.png").convert_alpha()
+oil=pygame.image.load("/GAME/PIX/oil.png").convert_alpha()
+carton=pygame.image.load("/GAME/PIX/carton.png").convert_alpha()
+plastic1=pygame.transform.scale(plastic1, (150,120)) 
+plastic2=pygame.transform.scale(plastic2, (150,170)) 
+fish1=pygame.transform.scale(fish1, (150,100)) 
+fish2=pygame.transform.scale(fish2, (150,100)) 
+oil=pygame.transform.scale(oil, (150,200)) 
+oil=pygame. transform. rotate(oil, 20) 
+plastic1=pygame. transform. rotate(plastic1, 40)
+carton=pygame.transform.scale(carton, (150,120)) 
+carton=pygame. transform. rotate(carton, -40)
+info=pygame.image.load("/GAME/PIX/info.png").convert_alpha()
+info=pygame.transform.scale(info,(700,500))
+
+#sprites
+sprites=[]
+sprites.append(bg)
+sprites.append(title)
+sprites.append(info)
+sprites.append(plastic1)
+sprites.append(plastic2)
+sprites.append(fish1)
+sprites.append(fish2)
+sprites.append(oil)
+sprites.append(carton)
+
+
+loop1 = True
+while loop1:    
+    for event in pygame.event.get():
+        Display.blit(bg,(0,0))
+        Display.blit(title,(55,150))
+        if event.type==pygame.KEYDOWN:
+            if event.key==pygame.K_RETURN:
+                loop1=False
+        pygame.display.update()
+
+loop2 = True
+while loop2:    
+    for event in pygame.event.get():
+        Display.blit(bg,(0,0))
+        Display.blit(info,(50,50))
+        if event.type==pygame.KEYDOWN:
+            if event.key==pygame.K_RETURN:
+                loop2=False
+        pygame.display.update()
+
+loop3 = True
+while loop3:    
+    for event in pygame.event.get():
+        Display.blit(bg,(0,0))
+        Display.blit(plastic1,(165,180))
+        Display.blit(plastic2,(80,400))
+        Display.blit(fish1,(400,40))
+        Display.blit(fish2,(400,300))
+        Display.blit(oil,(575,125))
+        Display.blit(carton,(10,10))
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            pos = pygame.mouse.get_pos()
+            print('working')
+        pygame.display.update()
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            loop3 = False
+            quit()
+    
